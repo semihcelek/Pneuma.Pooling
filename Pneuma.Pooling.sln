@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneuma.Pooling", "Pneuma.Pooling\Pneuma.Pooling.csproj", "{63A45DA4-FA6C-46D0-A626-868D6DBBD0A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pneuma.Pooling.Tests", "Pneuma.Pooling.Tests\Pneuma.Pooling.Tests.csproj", "{9CCDC3A4-95C8-42EC-AE58-AD1316EBA19F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63A45DA4-FA6C-46D0-A626-868D6DBBD0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A45DA4-FA6C-46D0-A626-868D6DBBD0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A45DA4-FA6C-46D0-A626-868D6DBBD0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A45DA4-FA6C-46D0-A626-868D6DBBD0A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CCDC3A4-95C8-42EC-AE58-AD1316EBA19F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CCDC3A4-95C8-42EC-AE58-AD1316EBA19F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CCDC3A4-95C8-42EC-AE58-AD1316EBA19F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CCDC3A4-95C8-42EC-AE58-AD1316EBA19F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
