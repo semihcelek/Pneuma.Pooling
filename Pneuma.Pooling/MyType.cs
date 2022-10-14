@@ -5,10 +5,11 @@ namespace SemihCelek.Pneuma.Pooling
 {
     public class MyType : IPoolable
     {
-        public int Id;
-        
         public event Action<IPoolable> ReturnPoolEvent;
+        
         public Status Status { get; private set; } = Status.Default;
+
+        public int Id;
 
         public void ReturnPool(IPoolable poolObject)
         {

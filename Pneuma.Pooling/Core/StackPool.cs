@@ -5,7 +5,7 @@ namespace SemihCelek.Pneuma.Pooling.Core
 {
     public class StackPool<T> : IPool<T> where T : IPoolable
     {
-        private readonly Queue<T> _pool;
+        private readonly Stack<T> _pool;
 
         private int _activeObjectCount;
 
@@ -13,12 +13,12 @@ namespace SemihCelek.Pneuma.Pooling.Core
         {
             PoolSettings defaultPoolSettings = new PoolSettings(128);
             
-            _pool = new Queue<T>(defaultPoolSettings.MaxPoolSize);
+            _pool = new Stack<T>(defaultPoolSettings.MaxPoolSize);
         }
 
         public StackPool(PoolSettings poolSettings)
         {
-            _pool = new Queue<T>(poolSettings.MaxPoolSize);
+            _pool = new Stack<T>(poolSettings.MaxPoolSize);
         }
 
         public T GetObjectFromPool()
@@ -39,7 +39,7 @@ namespace SemihCelek.Pneuma.Pooling.Core
                 return createdObject;
             }
 
-            T objectFromPool = _pool.Dequeue();
+            T objectFromPool = _pool.Pop();
             objectFromPool.Reset();
             
             return objectFromPool;
@@ -50,7 +50,7 @@ namespace SemihCelek.Pneuma.Pooling.Core
             objectToClaim.Reset();
             objectToClaim.ReturnPoolEvent -= OnReturnPoolEvent;
 
-            _pool.Enqueue((T) objectToClaim);
+            _pool.Push((T) objectToClaim);
             _activeObjectCount--;
         }
 
