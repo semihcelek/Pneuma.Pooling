@@ -3,7 +3,7 @@ using SemihCelek.Pneuma.Pooling.Core;
 
 namespace SemihCelek.Pneuma.Pooling
 {
-    public class MyType : IPoolable
+    public class Foo : IPoolable
     {
         public event Action<IPoolable> ReturnPoolEvent;
         
@@ -11,7 +11,7 @@ namespace SemihCelek.Pneuma.Pooling
 
         public int Id;
 
-        public void ReturnPool(IPoolable poolObject)
+        public void ReturnPool()
         {
             ReflectState(Status.ReturnToPool);
             ReturnPoolEvent?.Invoke(this);
@@ -31,23 +31,6 @@ namespace SemihCelek.Pneuma.Pooling
         {
             Status = status;
             Console.WriteLine(status.ToString());
-        }
-
-        public override bool Equals(object obj)
-        {
-            MyType candidateObject = obj as MyType;
-
-            if (candidateObject is null)
-            {
-                return false;
-            }
-
-            return CompareProperties(candidateObject);
-        }
-
-        private bool CompareProperties(MyType candidateObject)
-        {
-            return Id == candidateObject.Id;
         }
     }
 

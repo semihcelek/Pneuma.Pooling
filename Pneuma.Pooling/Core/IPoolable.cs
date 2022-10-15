@@ -6,7 +6,7 @@ namespace SemihCelek.Pneuma.Pooling.Core
     {
         event Action<IPoolable> ReturnPoolEvent;
         
-        void ReturnPool(IPoolable poolObject);
+        void ReturnPool();
         void Activate();
         void Reset();
     }

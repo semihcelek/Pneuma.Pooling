@@ -21,7 +21,7 @@ namespace SemihCelek.Pneuma.Pooling.Core
             _pool = new Stack<T>(poolSettings.MaxPoolSize);
         }
 
-        public T GetObjectFromPool()
+        public T GetFromPool()
         {
             return GetObjectFromPoolInternal();
         }
@@ -54,9 +54,9 @@ namespace SemihCelek.Pneuma.Pooling.Core
             _activeObjectCount--;
         }
 
-        public int GetInActiveObjectCount()
+        public int GetObjectCount()
         {
-            return _pool.Count;
+            return _pool.Count + _activeObjectCount;
         }
 
         public int GetActiveObjectCount()

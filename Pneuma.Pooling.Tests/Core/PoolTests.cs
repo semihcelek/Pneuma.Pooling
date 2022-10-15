@@ -5,96 +5,83 @@ namespace SemihCelek.Pneuma.Pooling.Test.Core
 {
     public class PoolTests
     {
-        [Fact]
-        public void Create_Pool_Without_Instance_Provider()
+        private readonly IPool<Foo> _fooPool;
+
+        public PoolTests()
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
-            
-            Assert.NotNull(myTypePool);
+            _fooPool = new StackPool<Foo>();
         }
 
         [Fact]
-        public void Get_Item_From_Pool_Without_Instance_Provider()
+        public void Create_Pool()
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
-            
-            MyType dummyType = new MyType();
-            
-            Assert.True(dummyType.Equals(myTypePool.GetObjectFromPool()));
+            Assert.NotNull(_fooPool);
         }
 
         [Fact]
-        public void Get_Item_With_Active_State_Without_Instance_Provider()
+        public void Get_Item_With_Active_State_From_New_Pool()
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
+            Foo foo = _fooPool.GetFromPool();
 
-            MyType myType = myTypePool.GetObjectFromPool();
-
-            Assert.Equal(Status.Active, myType.Status);
+            Assert.Equal(Status.Active, foo.Status);
+            
+            foo.ReturnPool();
         }
 
         [Fact]
-        public void Call_Return_Item_To_Pool_Method()
+        public void Return_Item_To_Pool_From_New_Pool()
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
+            Foo foo = _fooPool.GetFromPool();
+            
+            foo.ReturnPool();
 
-            MyType myType = myTypePool.GetObjectFromPool();
-            
-            myType.ReturnPool(myType);
-            
-            Assert.Equal(Status.Reset, myType.Status);
+            Assert.Equal(1, _fooPool.GetObjectCount());
         }
-        
+
         [Fact]
-        public void Return_Item_To_Pool()
+        public void Check_Returned_Item_State_From_New_Pool()
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
-
-            MyType myType = myTypePool.GetObjectFromPool();
+            Foo foo = _fooPool.GetFromPool();
             
-            myType.ReturnPool(myType);
-
-            Assert.Equal(1, myTypePool.GetInActiveObjectCount());
-        }
-
-        [Theory]
-        [InlineData(3)]
-        [InlineData(60)]
-        [InlineData(128)]
-        public void Get_Number_Of_Items_From_Pool(int number)
-        {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
-
-            for (int index = 0; index < number; index++)
-            {
-                myTypePool.GetObjectFromPool();
-            }
+            foo.ReturnPool();
             
-            Assert.Equal(number, myTypePool.GetActiveObjectCount());
+            Assert.Equal(Status.Reset, foo.Status);
         }
         
         [Theory]
         [InlineData(3)]
         [InlineData(60)]
         [InlineData(128)]
-        public void Get_Number_Of_Items_Returned_To_Pool(int number)
+        public void Get_Number_Of_Items_Returned_To_Pool_From_New_Pool(int number)
         {
-            IPool<MyType> myTypePool = new StackPool<MyType>();
-
-            MyType[] myTypes = new MyType[number];
+            Foo[] foos = new Foo[number];
             
             for (int index = 0; index < number; index++)
             {
-                myTypes[index] = myTypePool.GetObjectFromPool();
+                foos[index] = _fooPool.GetFromPool();
             }
 
-            foreach (MyType myType in myTypes)
+            for (var index = 0; index < foos.Length; index++)
             {
-                myType.ReturnPool(myType);
+                Foo foo = foos[index];
+                
+                foo.ReturnPool();
             }
+
+            Assert.Equal(number, _fooPool.GetObjectCount());
+            Assert.Equal(0, _fooPool.GetActiveObjectCount());
+        }
+
+        [Fact]
+        public void Check_Whether_Returns_Same_Object_From_New_Pool()
+        {
+            Foo foo = _fooPool.GetFromPool();
+
+            foo.ReturnPool();
+
+            Foo otherFoo = _fooPool.GetFromPool();
             
-            Assert.Equal(number, myTypePool.GetInActiveObjectCount());
-            Assert.Equal(0, myTypePool.GetActiveObjectCount());
+            Assert.Equal(foo , otherFoo);            
         }
     }
 }

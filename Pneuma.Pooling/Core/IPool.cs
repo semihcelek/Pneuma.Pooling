@@ -2,9 +2,9 @@ namespace SemihCelek.Pneuma.Pooling.Core
 {
     public interface IPool<T> where T : IPoolable 
     {
-        T GetObjectFromPool();
+        T GetFromPool();
 
-        int GetInActiveObjectCount();
+        int GetObjectCount();
         int GetActiveObjectCount();
     }
 }
