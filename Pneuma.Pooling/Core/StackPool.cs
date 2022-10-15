@@ -7,17 +7,29 @@ namespace SemihCelek.Pneuma.Pooling.Core
     {
         private readonly Stack<T> _pool;
 
+        private readonly IPoolableObjectProvider<T> _instanceProvider;
+
         private int _activeObjectCount;
 
-        public StackPool()
+        public StackPool(IPoolableObjectProvider<T> instanceProvider = null)
         {
+            if (instanceProvider != null)
+            {
+                _instanceProvider = instanceProvider;
+            }
+            
             PoolSettings defaultPoolSettings = new PoolSettings(128);
             
             _pool = new Stack<T>(defaultPoolSettings.MaxPoolSize);
         }
 
-        public StackPool(PoolSettings poolSettings)
+        public StackPool(PoolSettings poolSettings, IPoolableObjectProvider<T> instanceProvider = null)
         {
+            if (instanceProvider != null)
+            {
+                _instanceProvider = instanceProvider;
+            }
+            
             _pool = new Stack<T>(poolSettings.MaxPoolSize);
         }
 
@@ -30,7 +42,9 @@ namespace SemihCelek.Pneuma.Pooling.Core
         {
             if (_pool.Count <= 0)
             {
-                T createdObject = Activator.CreateInstance<T>();
+                T createdObject = _instanceProvider != null
+                    ? _instanceProvider.Create()
+                    : Activator.CreateInstance<T>();
 
                 _activeObjectCount++;
                 createdObject.Activate();

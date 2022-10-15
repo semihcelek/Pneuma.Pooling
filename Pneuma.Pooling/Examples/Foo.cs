@@ -1,9 +1,9 @@
 using System;
 using SemihCelek.Pneuma.Pooling.Core;
 
-namespace SemihCelek.Pneuma.Pooling
+namespace SemihCelek.Pneuma.Pooling.Examples
 {
-    public class Foo : IPoolable
+    public  class Foo : IPoolable
     {
         public event Action<IPoolable> ReturnPoolEvent;
         

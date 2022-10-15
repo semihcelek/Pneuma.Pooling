@@ -1,4 +1,5 @@
 using SemihCelek.Pneuma.Pooling.Core;
+using SemihCelek.Pneuma.Pooling.Examples;
 using Xunit;
 
 namespace SemihCelek.Pneuma.Pooling.Test.Core
