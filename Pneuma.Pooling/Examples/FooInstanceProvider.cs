@@ -1,6 +1,6 @@
-using SemihCelek.Pneuma.Pooling.Core;
+using Pneuma.Pooling.Core;
 
-namespace SemihCelek.Pneuma.Pooling.Examples
+namespace Pneuma.Pooling.Examples
 {
     public class FooInstanceProvider : IPoolableObjectProvider<Foo>
     {

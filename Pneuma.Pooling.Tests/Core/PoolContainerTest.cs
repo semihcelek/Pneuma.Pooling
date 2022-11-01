@@ -1,8 +1,4 @@
-using SemihCelek.Pneuma.Pooling.Core;
-using SemihCelek.Pneuma.Pooling.Examples;
-using Xunit;
-
-namespace SemihCelek.Pneuma.Pooling.Test.Core
+namespace Pneuma.Pooling.Test.Core
 {
     public class PoolContainerTest
     {

@@ -5,7 +5,7 @@
 
         <IsPackable>false</IsPackable>
 
-        <RootNamespace>SemihCelek.Pneuma.Pooling.Test</RootNamespace>
+        <RootNamespace>Pneuma.Pooling.Test</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

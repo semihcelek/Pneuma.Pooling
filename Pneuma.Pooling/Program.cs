@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SemihCelek.Pneuma.Pooling
+﻿namespace Pneuma.Pooling
 {
     class Program
     {

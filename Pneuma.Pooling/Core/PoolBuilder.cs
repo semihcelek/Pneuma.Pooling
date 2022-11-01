@@ -1,7 +1,6 @@
 using System;
-using SemihCelek.Pneuma.Pooling.Examples;
 
-namespace SemihCelek.Pneuma.Pooling.Core
+namespace Pneuma.Pooling.Core
 {
     public sealed class PoolBuilder<T> : IPoolBuilder<T> where T : IPoolable
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SemihCelek.Pneuma.Pooling.Core
+namespace Pneuma.Pooling.Core
 {
     public sealed class StackPool<T> : IPool<T> where T : IPoolable
     {

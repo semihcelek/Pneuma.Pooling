@@ -1,6 +1,6 @@
 using System;
 
-namespace SemihCelek.Pneuma.Pooling.Core
+namespace Pneuma.Pooling.Core
 {
     public interface IPoolable
     {
