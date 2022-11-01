@@ -1,6 +1,6 @@
 namespace SemihCelek.Pneuma.Pooling.Core
 {
-    public interface IPool<T> where T : IPoolable 
+    public interface IPool<T>
     {
         T GetFromPool();
 

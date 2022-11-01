@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SemihCelek.Pneuma.Pooling.Core
 {
-    public class StackPool<T> : IPool<T> where T : IPoolable
+    public sealed class StackPool<T> : IPool<T> where T : IPoolable
     {
         private readonly Stack<T> _pool;
 
@@ -76,16 +76,6 @@ namespace SemihCelek.Pneuma.Pooling.Core
         public int GetActiveObjectCount()
         {
             return _activeObjectCount;
-        }
-
-        public readonly struct PoolSettings
-        {
-            public readonly int MaxPoolSize;
-            
-            public PoolSettings(int maxPoolSize)
-            {
-                MaxPoolSize = maxPoolSize;
-            }
         }
     }
 }
