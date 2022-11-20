@@ -10,7 +10,7 @@ namespace Pneuma.Pooling.Test.Core
         public void Create_Pool_With_PoolBuilder()
         {
             PoolBuilder<Foo> fooBuilder = new PoolBuilder<Foo>();
-            IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess<Foo>(PoolType.StackPool).GetPool();
+            IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess(PoolType.StackPool).GetPool();
 
             Foo poolable = fooPool.GetFromPool();
 
@@ -19,17 +19,17 @@ namespace Pneuma.Pooling.Test.Core
         }
         
         [Fact]
-        public void Create_Pool_Using_Object_Provider_With_PoolBuilder()
+        public void Create_Pool_With_PoolBuilder_Using_Object_Provider()
         {
-            // PoolBuilder<Foo> fooBuilder = new PoolBuilder<Foo>();
-            // IPoolableObjectProvider<Foo> fooProvider = new FooInstanceProvider();
-            //
-            // IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess<Foo>(PoolType.StackPool).WithObjectProvider(fooBuilder).GetPool();
-            //
-            // Foo poolable = fooPool.GetFromPool();
-            //
-            // Assert.NotNull(poolable);
-            // Assert.IsAssignableFrom<IPoolable>(poolable);
+            PoolBuilder<Foo> fooBuilder = new PoolBuilder<Foo>();
+            IPoolableObjectProvider<Foo> fooProvider = new FooInstanceProvider();
+            
+            IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess(PoolType.StackPool).WithObjectProvider(fooProvider).GetPool();
+            
+            Foo poolable = fooPool.GetFromPool();
+            
+            Assert.NotNull(poolable);
+            Assert.IsAssignableFrom<IPoolable>(poolable);
         }
     }
 }

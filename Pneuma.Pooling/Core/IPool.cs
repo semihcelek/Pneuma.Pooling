@@ -1,6 +1,6 @@
 namespace Pneuma.Pooling.Core
 {
-    public interface IPool<T>
+    public interface IPool<out T>
     {
         T GetFromPool();
 
