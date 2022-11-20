@@ -1,5 +1,5 @@
 using Pneuma.Pooling.Core;
-using Pneuma.Pooling.Examples;
+using Pneuma.Pooling.Test.Examples;
 using Xunit;
 
 namespace Pneuma.Pooling.Test.Core

@@ -1,7 +1,7 @@
 using System;
 using Pneuma.Pooling.Core;
 
-namespace Pneuma.Pooling.Examples
+namespace Pneuma.Pooling.Test.Examples
 {
     public  class Foo : IPoolable
     {
