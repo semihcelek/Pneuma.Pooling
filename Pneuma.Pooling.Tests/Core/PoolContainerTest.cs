@@ -10,8 +10,12 @@ namespace Pneuma.Pooling.Test.Core
         private int _firstRegisteredPoolHash;
         private int _secondRegisteredPoolHash;
 
+        private PoolContainer _poolContainer;
+
         public PoolContainerTest()
         {
+            _poolContainer = new PoolContainer();
+            
             Register_Pool_To_PoolContainer();
             Register_Pool_Utilizing_Provider();
         }
@@ -21,7 +25,7 @@ namespace Pneuma.Pooling.Test.Core
             PoolBuilder<Foo> fooBuilder = new PoolBuilder<Foo>();
             IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess(PoolType.StackPool).GetPool();
 
-            _firstRegisteredPoolHash = PoolContainer.RegisterPool(fooPool);
+            _firstRegisteredPoolHash = _poolContainer.RegisterPool(fooPool);
         }
 
         private void Register_Pool_Utilizing_Provider()
@@ -30,13 +34,13 @@ namespace Pneuma.Pooling.Test.Core
             IPoolableObjectProvider<Foo> fooProvider = new FooInstanceProvider();
             IPool<Foo> fooPool = fooBuilder.StartPoolBuildingProcess(PoolType.StackPool).WithObjectProvider(fooProvider).GetPool();
 
-            _secondRegisteredPoolHash = PoolContainer.RegisterPool(fooPool);
+            _secondRegisteredPoolHash = _poolContainer.RegisterPool(fooPool);
         }
 
         [Fact]
         private void Use_Pool_From_Pool_Collection()
         {
-            IPool<Foo> fooPool = PoolContainer.GetPoolFromHash<Foo>(_firstRegisteredPoolHash);
+            IPool<Foo> fooPool = _poolContainer.GetPoolFromHash<Foo>(_firstRegisteredPoolHash);
             
             Assert.NotNull(fooPool);
 
@@ -48,7 +52,7 @@ namespace Pneuma.Pooling.Test.Core
         [Fact]
         private void Use_Pool_From_Pool_Collection_With_ObjectProvider()
         {
-            IPool<Foo> fooPool = PoolContainer.GetPoolFromHash<Foo>(_secondRegisteredPoolHash);
+            IPool<Foo> fooPool = _poolContainer.GetPoolFromHash<Foo>(_secondRegisteredPoolHash);
             
             Assert.NotNull(fooPool);
 

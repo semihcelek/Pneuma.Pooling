@@ -4,13 +4,13 @@ using Pneuma.Pooling.Utilities;
 
 namespace Pneuma.Pooling.Core
 {
-    public static class PoolContainer
+    public sealed class PoolContainer
     {
-        private static Dictionary<int, IPool<IPoolable>> _poolDictionary = new();
+        private Dictionary<int, IPool<IPoolable>> _poolDictionary = new();
 
-        private static int _poolRegisterIndex;
-        
-        public static int RegisterPool(IPool<IPoolable> pool, bool allowMultiple = false)
+        private int _poolRegisterIndex;
+
+        public int RegisterPool(IPool<IPoolable> pool, bool allowMultiple = false)
         {
             if (_poolDictionary.ContainsValue(pool) && !allowMultiple)
             {
@@ -23,7 +23,7 @@ namespace Pneuma.Pooling.Core
             return _poolRegisterIndex;
         }
 
-        public static IPool<T> GetPoolFromHash<T>(int registeredPoolHash) where T : IPoolable
+        public IPool<T> GetPoolFromHash<T>(int registeredPoolHash) where T : IPoolable
         {
             if (_poolDictionary.ContainsKey(registeredPoolHash))
             {
@@ -33,7 +33,7 @@ namespace Pneuma.Pooling.Core
             throw new Exception("Requested pool has not been registered");
         }
 
-        public static void DisposePools()
+        public void DisposePools()
         {
             _poolDictionary.Clear();
         }
